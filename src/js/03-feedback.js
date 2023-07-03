@@ -1,4 +1,3 @@
-
 import throttle from 'lodash.throttle';
 
 const formContainer = document.querySelector('.feedback-form');
@@ -12,32 +11,30 @@ const data = {
   message: '',
 };
 
-const setData = throttle((localData) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+const setData = throttle(localData => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }, 500);
 
-formContainer.addEventListener('input', function(event) {
-    data[event.target.name] = event.target.value;
-    setData(data);
+formContainer.addEventListener('input', function (event) {
+  data[event.target.name] = event.target.value;
+  setData(data);
 });
 
-window.addEventListener("load", (event) => {
-    const localData = JSON.parse(localStorage.getItem(STORAGE_KEY))
-    
+window.addEventListener('load', event => {
+  const localData = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+  if (localData) {
     data.email = localData.email;
     data.message = localData.message;
     emailEl.value = localData.email;
     messageEl.value = localData.message;
-  });
+  }
+});
 
-  formContainer.addEventListener("submit", (e) => {
-    e.preventDefault();
-    formContainer.reset();
-    localStorage.removeItem(STORAGE_KEY);
+formContainer.addEventListener('submit', e => {
+  e.preventDefault();
+  formContainer.reset();
+  localStorage.removeItem(STORAGE_KEY);
 
-    console.log(data)
-  })
-
-
-
-
+  console.log(data);
+});
