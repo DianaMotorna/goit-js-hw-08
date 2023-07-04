@@ -35,8 +35,9 @@ formContainer.addEventListener('submit', e => {
   e.preventDefault();
   formContainer.reset();
   localStorage.removeItem(STORAGE_KEY);
-  data.email = "";
-  data.message = "";
 
   console.log(data);
+
+  data.email = '';
+  data.message = '';
 });
